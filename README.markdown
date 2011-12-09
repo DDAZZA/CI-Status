@@ -2,9 +2,8 @@ CI-Status
 ========
 
 The applicaiton provides a way to find out the status of builds on a jenkins ci server without having to visit the page.
-The application creates a status icon for each build displaying its status.
 
-For most Linux users with they will also get a notification when the status of one of the builds.
+This is done by displaying a status icon for each build showing its status.  For most Linux users they will also get a notification when the status of a build changes.
 
 Dependencies/Requirements
 -----------
