@@ -6,12 +6,13 @@ The applicaiton provides a way to find out the status of builds on a jenkins ci 
 This is done by displaying a status icon for each build showing its status.  For most Linux users they will also get a notification when the status of a build changes.
 
 Dependencies/Requirements
------------
+-------------------------
 
-This application requires that the Java Runtime Enviroment is installed.
+For Usage
+  This application requires that the Java Runtime Enviroment is installed.
 
-Usage
------
+For Development
+  The application uses the jsoup libary which is included in the lib.
 
 * Download the jar file
 * Execute the jar
