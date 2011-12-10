@@ -12,7 +12,6 @@ public class IconManager
 			BuildStatusIcon icon = new BuildStatusIcon(b.name);
 			icon.setStatus(b.condition);
 			icons.add(icon);
-			
 		}
 	}
 	

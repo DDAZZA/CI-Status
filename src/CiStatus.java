@@ -4,8 +4,8 @@ import java.util.Vector;
 public class CiStatus
 {
 
-	final String jenkins_addr = "http://ci.jenkins-ci.org/view/Infrastructure/";
-	final int update_delay = 20000;
+	static String jenkins_addr = "http://ci.jenkins-ci.org/view/Infrastructure/";
+	static int update_delay = 20000;
 	
 	
 	Vector<Build> builds;
@@ -15,8 +15,58 @@ public class CiStatus
 	
 	public static void main (String [] args) throws Exception 
 	{
-		CiStatus ci_status = new CiStatus();
-		//TODO parse params
+		int i = 0, j;
+		String arg;
+		char flag;
+
+	    while (i < args.length && args[i].startsWith("-")) {
+	        arg = args[i++];
+
+	// use this type of check for arguments that require arguments
+	        if (arg.equals("--delay"))
+	        {
+	            if (i < args.length)
+	            {
+	                update_delay = Integer.parseInt(args[i++]) * 1000;
+	            	System.out.println("Delay: " + update_delay);
+	            }
+	            else
+	                System.err.println("-delay requires the number of seconds between update");
+	        }
+	        // use this type of check for arguments that require arguments
+            else if (arg.equals("--addr")) {
+                if (i < args.length)
+                {
+                    jenkins_addr = args[i++];
+                    System.out.println("Address: " + jenkins_addr);
+                }
+                else
+                    System.err.println("-output requires a filename");
+            }
+	
+	// use this type of check for a series of flag arguments
+	        else {
+	            for (j = 1; j < arg.length(); j++) {
+	                flag = arg.charAt(j);
+	                switch (flag) {
+	                case 'j':
+	                    //set mode as jenkins
+	                    break;
+	                case 'h':
+	                    //set mode as hudson
+	                    break;
+	                default:
+	                    System.err.println("CiStatus: illegal option " + flag);
+	                    break;
+	                }
+	            }
+	        }
+	    }
+	    
+	    //if (i == args.length && i > 0)
+	    //    System.err.println("Usage: CiStatus [-addr <address>] [-delay <delay>]");
+	 
+		new CiStatus();
 	}
 	
 	CiStatus() throws IOException, InterruptedException
@@ -82,7 +132,7 @@ public class CiStatus
 	private void update() throws IOException, InterruptedException
 	{
 		Vector<Build> newBuilds = getBuilds(); 
-		scraper.printBuilds(builds);
+		//scraper.printBuilds(builds);
 		displayBuilds(newBuilds);
 		
 		if (should_notify)

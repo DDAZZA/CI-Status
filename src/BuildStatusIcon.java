@@ -27,7 +27,8 @@ public class BuildStatusIcon {
 	{
 		buildName = buildname;
 		  //Check the SystemTray is supported
-        if (!SystemTray.isSupported()) {
+        if (!SystemTray.isSupported())
+        {
             System.out.println("SystemTray is not supported");
             return;
         }
@@ -37,19 +38,24 @@ public class BuildStatusIcon {
         trayIcon.setToolTip(buildname);
         final SystemTray tray = SystemTray.getSystemTray();
 
-        try {
+        try
+        {
             tray.add(trayIcon);
-        } catch (AWTException e) {
+        } 
+        catch (AWTException e)
+        {
             System.out.println("TrayIcon could not be added.");
         }
 	}
 	
 	
     //Obtain the image URL
-    protected static Image createImage(String path, String description) {
+    protected static Image createImage(String path, String description)
+    {
         URL imageURL = CiStatus.class.getResource(path);
         
-        if (imageURL == null) {
+        if (imageURL == null)
+        {
             System.err.println("Resource not found: " + path);
             return null;
         } else {
