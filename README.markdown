@@ -1,14 +1,20 @@
 CI-Status
 ========
 
-The applicaiton provides a way to find out the status of builds on a jenkins ci server without having to visit the page.
+This applicaiton provides a way to see the statuses of builds on a jenkins ci server without having to visit its page.
 
-This is done by displaying a status icon for each build showing its status.  For most Linux users they will also get a notification when the status of a build changes.
+This is done by displaying a status icon for each build.  For most Linux users they will also get a notification, informing them when the status of a build changes.
 
 Dependencies/Requirements
------------
+-------------------------
 
-This application requires that the Java Runtime Enviroment is installed.
+### For Usage
+
+  Java Runtime Enviroment (JRE)
+
+### For Development
+
+  The jsoup libary which is included in the lib.
 
 Usage
 -----
