@@ -131,11 +131,17 @@ public class CiStatus
 	
 	private void update() throws IOException, InterruptedException
 	{
-		Vector<Build> newBuilds = getBuilds(); 
-		//scraper.printBuilds(builds);
-		displayBuilds(newBuilds);
-		
-		if (should_notify)
-		displayChanges(getBuildDiff(newBuilds));
+		try {
+			Vector<Build> newBuilds = getBuilds(); 
+			//scraper.printBuilds(builds);
+			displayBuilds(newBuilds);
+			
+			if (should_notify)
+			displayChanges(getBuildDiff(newBuilds));
+		}
+		catch(Exception e)
+		{
+			System.err.println(e);
+		}
 	}
 }

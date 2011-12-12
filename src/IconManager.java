@@ -9,8 +9,7 @@ public class IconManager
 	{
 		for(Build b : builds)
 		{
-			BuildStatusIcon icon = new BuildStatusIcon(b.name);
-			icon.setStatus(b.condition);
+			BuildStatusIcon icon = new BuildStatusIcon(b);
 			icons.add(icon);
 		}
 	}

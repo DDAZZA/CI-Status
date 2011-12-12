@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -32,9 +33,9 @@ public class BuildStatusIcon implements ActionListener{
     MenuItem exitItem = new MenuItem("Exit");
     
     
-	public BuildStatusIcon(String buildname) 
+	public BuildStatusIcon(Build build) 
 	{
-		buildName = buildname;
+		buildName = build.name;
 		  //Check the SystemTray is supported
         if (!SystemTray.isSupported())
         {
@@ -42,18 +43,19 @@ public class BuildStatusIcon implements ActionListener{
             return;
         }
         
-        trayIcon = new TrayIcon(createImage("images/grey.png", buildname));
+        trayIcon = new TrayIcon(createImage("images/grey.png", buildName));
+        this.setStatus(build.condition);
         trayIcon.setImageAutoSize(true);
-        trayIcon.setToolTip(buildname);
+        trayIcon.setToolTip(buildName);
         final SystemTray tray = SystemTray.getSystemTray();
-        
-
+       
         try
         {
         	exitItem.addActionListener(this);
         	
         	//popup.addSeparator();
         	popup.add(exitItem);
+
             trayIcon.setPopupMenu(popup);
             tray.add(trayIcon);
         } 
