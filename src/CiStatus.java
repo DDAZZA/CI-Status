@@ -129,7 +129,7 @@ public class CiStatus
 		}
 	}
 	
-	private void update() throws IOException, InterruptedException
+	private void update()
 	{
 		try {
 			Vector<Build> newBuilds = getBuilds(); 
