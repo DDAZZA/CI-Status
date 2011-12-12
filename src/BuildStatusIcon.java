@@ -1,13 +1,19 @@
 import java.awt.AWTException;
 import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
 
 
-public class BuildStatusIcon {
+public class BuildStatusIcon implements ActionListener{
 
 	final String BLUE = "images/blue.png";
 	final String RED = "images/red.png";
@@ -22,7 +28,10 @@ public class BuildStatusIcon {
 	
 	TrayIcon trayIcon;
 	String buildName;
-	
+	final PopupMenu popup = new PopupMenu();
+    MenuItem exitItem = new MenuItem("Exit");
+    
+    
 	public BuildStatusIcon(String buildname) 
 	{
 		buildName = buildname;
@@ -32,14 +41,20 @@ public class BuildStatusIcon {
             System.out.println("SystemTray is not supported");
             return;
         }
-
+        
         trayIcon = new TrayIcon(createImage("images/grey.png", buildname));
         trayIcon.setImageAutoSize(true);
         trayIcon.setToolTip(buildname);
         final SystemTray tray = SystemTray.getSystemTray();
+        
 
         try
         {
+        	exitItem.addActionListener(this);
+        	
+        	//popup.addSeparator();
+        	popup.add(exitItem);
+            trayIcon.setPopupMenu(popup);
             tray.add(trayIcon);
         } 
         catch (AWTException e)
@@ -94,4 +109,15 @@ public class BuildStatusIcon {
     {
     	return buildName;
     }   
+
+    private void close()
+    {
+    	System.exit(0);
+    }
+
+
+	@Override
+	public void actionPerformed(ActionEvent ae) {
+		close();
+	}
 }
