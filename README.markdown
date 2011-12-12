@@ -14,15 +14,19 @@ Dependencies/Requirements
 
 ### For Development
 
-  The jsoup libary which is included in the lib.
+  The [jsoup](http://github.com/jhy/jsoup "jsoup") HTML parser which is included in the lib.
 
 Usage
 -----
 
-* Download the jar file
-* Execute the jar
-  * You can also run the application via the command line with:
-    `$ java -jar CiStatus.jar`
+Download the jar file from this repository.
+
+You can execute the program with `$ java -jar CiStatus.jar`
+
+The application takes command line arguments. 
+
+* `--addr <Jenkins Address>` The http address of the jenkins website.
+* `--delay <Seconds>` The delay between updating build statuses.    
 
 License
 -------
