@@ -19,7 +19,7 @@ Dependencies/Requirements
 Usage
 -----
 
-Download the jar file from this repository.
+Download the jar file from [here](https://github.com/davidelliott/CI-Status/raw/master/CiStatus.jar "CI-Status").
 
 You can execute the program with `$ java -jar CiStatus.jar`
 
