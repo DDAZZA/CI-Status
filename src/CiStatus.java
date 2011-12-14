@@ -3,17 +3,15 @@ import java.util.Vector;
 
 public class CiStatus
 {
-
 	static String jenkins_addr = "http://ci.jenkins-ci.org/view/Infrastructure/";
-	static int update_delay = 20000;
-	
-	
+	static int update_delay = 8000;
+
 	Vector<Build> builds;
 	Scraper scraper;
 	IconManager im;
 	boolean should_notify = false;
-	
-	public static void main (String [] args) throws Exception 
+
+	public static void main (String [] args) throws Exception
 	{
 		int i = 0, j;
 		String arg;
@@ -81,8 +79,8 @@ public class CiStatus
 		
 		while(true)
 		{
-			update();
 			Thread.sleep(update_delay);
+			update();
 		}
 	}
 	
@@ -125,6 +123,7 @@ public class CiStatus
 		if (buildDiffs.size() > 0)
 		{
 			Process p = rt.exec("notify-send Jenkins " + notifications);
+			System.out.println("notify-send");
 			p.waitFor();
 		}
 	}
@@ -138,10 +137,12 @@ public class CiStatus
 			
 			if (should_notify)
 			displayChanges(getBuildDiff(newBuilds));
+			
+			builds = newBuilds;
 		}
 		catch(Exception e)
 		{
-			System.err.println(e);
+			e.printStackTrace();
 		}
 	}
 }

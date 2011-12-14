@@ -6,9 +6,12 @@ import org.jsoup.select.Elements;
 
 public class Scraper {
 
-	final static int BLUE = 1;
-	final static int RED = 2;
-	final static int GREY = 3;
+	private final static int GREY = 0;
+	private static final int YELLOW = -1;
+	private final static int BLUE = 1;
+	private static final int BLUE_ANIME = 2;
+	private final static int RED = 3;
+	private static final int RED_ANIME = 4;
 	
 	public static void printBuilds(Vector<Build> builds)
 	{
@@ -60,15 +63,27 @@ public class Scraper {
 	private static int stripCondition (Object o)
 	{
 		String s = o.toString();
-		if(s.contains("blue"))
+		if(s.contains("blue.png"))
 		{
 			return BLUE;
 		}
-		else if(s.contains("red"))
+		else if(s.contains("blue_anime.gif"))
+		{
+			return BLUE_ANIME;
+		}
+		else if(s.contains("red.png"))
 		{
 			return RED;
 		}
-		else if(s.contains("grey"))
+		else if(s.contains("red_anime.gif"))
+		{
+			return RED_ANIME;
+		}
+		else if(s.contains("yellow.png"))
+		{
+			return YELLOW;
+		}
+		else if(s.contains("grey.png"))
 		{
 			return GREY;
 		}
