@@ -138,6 +138,7 @@ public class CiStatus
 			
 			if (should_notify)
 			displayChanges(getBuildDiff(newBuilds));
+			//TODO builds = newBuilds; // Update builds
 		}
 		catch(Exception e)
 		{
