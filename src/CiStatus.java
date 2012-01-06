@@ -11,7 +11,7 @@ public class CiStatus
 	Vector<Build> builds;
 	Scraper scraper;
 	IconManager im;
-	boolean should_notify = false;
+	boolean should_notify = true;
 	
 	public static void main (String [] args) throws Exception 
 	{
@@ -124,7 +124,12 @@ public class CiStatus
 		}
 		if (buildDiffs.size() > 0)
 		{
-			Process p = rt.exec("notify-send Jenkins " + notifications);
+      String[] cmd = new String[3];
+      cmd[0] = "notify-send";
+      cmd[1] = "Jenkins";
+      cmd[2] = notifications;
+
+			Process p = rt.exec(cmd);
 			p.waitFor();
 		}
 	}
