@@ -12,6 +12,7 @@ public class CiStatus
 	Scraper scraper;
 	IconManager im;
 	boolean should_notify = true;
+	boolean should_show_trayicon = true;
 	
 	public static void main (String [] args) throws Exception 
 	{
@@ -74,10 +75,15 @@ public class CiStatus
 		should_notify = System.getProperty("os.name").equals("Linux");
 		System.out.println("Should show notifications: " + should_notify);
 		
-		scraper = new Scraper();		
+		scraper = new Scraper();
 		builds = getBuilds();
 		System.out.println("Found " + builds.size() + " builds.");
-		im = new IconManager(builds);
+    try {
+      im = new IconManager(builds);
+    }
+    catch(Exception e){
+      should_show_trayicon = false;
+    }
 		
 		while(true)
 		{
@@ -139,8 +145,9 @@ public class CiStatus
 		try {
 			Vector<Build> newBuilds = getBuilds(); 
 			//scraper.printBuilds(builds);
-			displayBuilds(newBuilds);
-			
+      if(should_show_trayicon)
+        displayBuilds(newBuilds);
+
 			if (should_notify)
 			displayChanges(getBuildDiff(newBuilds));
 			//TODO builds = newBuilds; // Update builds
