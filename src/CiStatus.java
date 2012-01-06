@@ -3,11 +3,9 @@ import java.util.Vector;
 
 public class CiStatus
 {
-
 	static String jenkins_addr = "http://ci.jenkins-ci.org/view/Infrastructure/";
-	static int update_delay = 20000;
-	
-	
+	static int update_delay = 8000;
+
 	Vector<Build> builds;
 	Scraper scraper;
 	IconManager im;
@@ -87,8 +85,8 @@ public class CiStatus
 		
 		while(true)
 		{
-			update();
 			Thread.sleep(update_delay);
+			update();
 		}
 	}
 	
@@ -150,11 +148,12 @@ public class CiStatus
 
 			if (should_notify)
 			displayChanges(getBuildDiff(newBuilds));
-			//TODO builds = newBuilds; // Update builds
+
+			builds = newBuilds;
 		}
 		catch(Exception e)
 		{
-			System.err.println(e);
+			e.printStackTrace();
 		}
 	}
 }

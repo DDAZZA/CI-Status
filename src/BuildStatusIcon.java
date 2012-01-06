@@ -6,26 +6,25 @@ import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
 
 
 public class BuildStatusIcon implements ActionListener{
 
 	final String BLUE = "images/blue.png";
+	final String BLUE_ANIME = "images/blue_anime.gif";
 	final String RED = "images/red.png";
+	final String RED_ANIME = "images/red_anime.gif";
 	final String YELLOW = "images/yellow.png";
 	final String GREY = "images/grey.png";
 	
 	final int UNSTABLE = -1;
-	final int PENDING = 3;
+	final int PENDING = 0;
 	final int SUCCESS = 1;
-	final int FAILED = 2;
-	
+	final int SUCCESS_BUILDING = 2;
+	final int FAILED = 3;
+	final int FAILED_BUILDING = 4;
 	
 	TrayIcon trayIcon;
 	String buildName;
@@ -82,14 +81,15 @@ public class BuildStatusIcon implements ActionListener{
     
     public void setStatus(int condition)
     {
-    	Image image = createImage(GREY, "Unknown");
+    	Image image = createImage(YELLOW, "Unknown");
     	
     	switch(condition)
     	{
     	case UNSTABLE:
     		image = createImage(YELLOW, "Unstable");
     		break;
-    	case 0:
+    	case SUCCESS_BUILDING:
+    		image = createImage(BLUE_ANIME, "Unknown");
     		break;
     	case SUCCESS:
     		image = createImage(BLUE, "Unknown");
@@ -97,10 +97,11 @@ public class BuildStatusIcon implements ActionListener{
     	case FAILED:
     		image = createImage(RED, "Unknown");
     		break;
+    	case FAILED_BUILDING:
+    		image = createImage(RED_ANIME, "Unknown");
+    		break;	
     	case PENDING:
     		image = createImage(GREY, "Unknown");
-    		break;
-    	case 4:
     		break;
     	}
     	
