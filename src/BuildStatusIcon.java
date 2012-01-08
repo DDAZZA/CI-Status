@@ -28,6 +28,7 @@ public class BuildStatusIcon implements ActionListener{
 	
 	TrayIcon trayIcon;
 	String buildName;
+	int buildCondition;
 	final PopupMenu popup = new PopupMenu();
     MenuItem exitItem = new MenuItem("Exit");
     
@@ -35,6 +36,8 @@ public class BuildStatusIcon implements ActionListener{
 	public BuildStatusIcon(Build build) 
 	{
 		buildName = build.name;
+		buildCondition = build.condition;
+		
 		  //Check the SystemTray is supported
         if (!SystemTray.isSupported())
         {
@@ -104,8 +107,10 @@ public class BuildStatusIcon implements ActionListener{
     		image = createImage(GREY, "Unknown");
     		break;
     	}
-    	
+    	trayIcon.getImage().flush();
     	trayIcon.setImage(image);
+    	image.flush();
+    	System.out.println("Imagechange!?");
     }
     
     public String getBuildName()
@@ -122,5 +127,10 @@ public class BuildStatusIcon implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		close();
+	}
+
+
+	public int getBuildCondition() {
+		return buildCondition;
 	}
 }

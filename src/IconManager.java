@@ -20,7 +20,7 @@ public class IconManager
 		{
 			for (BuildStatusIcon i :icons)
 			{
-				if (b.name == i.getBuildName())
+				if (b.name.equals(i.getBuildName()) && b.condition != i.getBuildCondition() )
 				{
 					i.setStatus(b.condition);
 				}
